@@ -18,7 +18,7 @@ mutation DeleteProduct($id: ID!) {
 }
 `;
 
-export default function ProductList({ refresh }) {
+export default function ProductList({ refresh, editingProductId, onEdit }) {
   const [products, setProducts] = useState([]);
 
   const load = async () => {
@@ -35,6 +35,8 @@ export default function ProductList({ refresh }) {
   useEffect(() => {
     load();
   }, [refresh]);
+
+  const visibleProducts = products.filter((product) => product.id !== editingProductId);
 
   const remove = async (id) => {
     if (!confirm('Delete this product?')) return;
@@ -60,13 +62,15 @@ export default function ProductList({ refresh }) {
       </thead>
 
       <tbody className="divide-y divide-slate-800 text-slate-100">
-        {products.map((p) => (
+        {visibleProducts.map((p) => (
           <tr key={p.id} className="align-top">
             <td className="p-3 font-medium text-slate-50">{p.name}</td>
             <td className="p-3 text-slate-300">{p.description}</td>
             <td className="p-3 text-slate-200">{p.price} €</td>
             <td className="space-x-2 p-3">
-              <button className="btn-edit">Edit</button>
+              <button className="btn-edit" onClick={() => onEdit?.(p)}>
+                Edit
+              </button>
               <button className="btn-delete" onClick={() => remove(p.id)}>
                 Delete
               </button>
