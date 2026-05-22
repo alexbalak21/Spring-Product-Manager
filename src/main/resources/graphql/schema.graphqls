@@ -1,6 +1,7 @@
 type Query {
   products: [Product!]!
   product(id: ID!): Product
+  about: String!
 }
 
 type Mutation {

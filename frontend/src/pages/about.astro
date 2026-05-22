@@ -1,7 +1,8 @@
 ---
 import { GraphQLClient } from "graphql-request";
+import SiteLayout from "../components/SiteLayout.astro";
 
-const client = new GraphQLClient("/graphql");
+const client = new GraphQLClient(new URL("/graphql", Astro.url.origin).toString());
 
 const query = `
   query {
@@ -12,21 +13,28 @@ const query = `
 let aboutText = "";
 
 try {
-  const data = await client.request(query);
-  aboutText = data.about;
+	const data = await client.request(query);
+	aboutText = data.about ?? "No about message returned.";
 } catch (err) {
-  aboutText = "Error loading about message.";
+	aboutText = "Error loading about message.";
 }
 ---
 
-<html>
-  <body class="p-8 bg-gray-50">
-    <h1 class="text-3xl font-bold mb-4">About</h1>
+<SiteLayout title="About - Product Manager">
+	<section class="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
+		<div class="rounded-2xl border border-slate-800 bg-slate-900/80 p-6 shadow-lg shadow-slate-950/40 backdrop-blur">
+			<p class="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-400">About</p>
+			<h1 class="mt-2 text-3xl font-semibold tracking-tight text-slate-50">Product Manager</h1>
+			<p class="mt-4 max-w-2xl text-base leading-7 text-slate-300">
+				This frontend uses Astro, React islands, and a GraphQL proxy to talk to the backend while keeping the UI fast and simple.
+			</p>
+		</div>
 
-    <p class="text-lg bg-white p-4 rounded shadow">
-      {aboutText}
-    </p>
-
-    <a href="/" class="text-blue-600 underline mt-4 inline-block">Back to Home</a>
-  </body>
-</html>
+		<div class="rounded-2xl border border-slate-800 bg-slate-900/80 p-6 shadow-lg shadow-slate-950/40 backdrop-blur">
+			<p class="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-400">Backend message</p>
+			<div class="mt-4 rounded-xl border border-slate-800 bg-slate-950 p-4 text-slate-100">
+				{aboutText}
+			</div>
+		</div>
+	</section>
+</SiteLayout>

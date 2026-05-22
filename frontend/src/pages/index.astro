@@ -1,18 +1,8 @@
 ---
+import SiteLayout from "../components/SiteLayout.astro";
 import App from "../components/App.jsx";
-import "../styles/global.css";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Product Manager</title>
-	</head>
-	<body>
-		<App client:load />
-	</body>
-</html>
+<SiteLayout title="Product Manager">
+	<App client:load />
+</SiteLayout>
