@@ -1,6 +1,6 @@
-# 🌟 Astro Frontend — Product CRUD (GraphQL + SPA)
+# 🌟 Astro Frontend — Product CRUD (GraphQL + React + Tailwind)
 
-This is a simple **SPA-style Astro frontend** that connects to a **Spring Boot GraphQL backend** running at:
+This is a simple **SPA‑style Astro frontend** that connects to a **Spring Boot GraphQL backend** running at:
 
 ```
 http://localhost:8080/graphql
@@ -12,21 +12,67 @@ The app provides:
 - A **Product List** table  
 - **Edit** and **Delete** actions  
 - A minimal GraphQL client using `graphql-request`  
-- A simple SPA-like experience using Astro Islands + React
+- A simple SPA experience using Astro Islands + React  
+- TailwindCSS for styling  
 
 ---
 
 ## 📦 Tech Stack
 
-- **Astro** (frontend framework)
-- **React** (for interactive components)
-- **TailwindCSS** (optional)
-- **graphql-request** (GraphQL client)
-- **Spring Boot GraphQL backend**
+- Astro  
+- React (Astro Islands)  
+- TailwindCSS  
+- graphql-request  
+- Spring Boot GraphQL backend  
 
 ---
 
-## 📁 Project Structure
+## 🚀 1. Project Setup
+
+### Create the Astro project
+
+```bash
+npm create astro@latest product-frontend
+cd product-frontend
+```
+
+Choose:
+
+- Template → **Empty** or **Basics**
+- Install dependencies → **Yes**
+
+---
+
+## 🚀 2. Add React
+
+```bash
+npx astro add react
+```
+
+---
+
+## 🚀 3. Add TailwindCSS
+
+```bash
+npx astro add tailwind
+```
+
+This creates:
+
+- `tailwind.config.mjs`
+- `src/styles/global.css`
+
+---
+
+## 🚀 4. Install GraphQL client
+
+```bash
+npm install graphql graphql-request
+```
+
+---
+
+# 📁 Project Structure
 
 ```
 src/
@@ -34,29 +80,13 @@ src/
 ├── components/
 │   ├── CreateProduct.jsx
 │   ├── ProductList.jsx
-│   └── EditProductModal.jsx
+│   └── EditProductModal.jsx   (optional)
 │
 ├── lib/
 │   └── graphql.js
 │
 └── pages/
     └── index.astro
-```
-
----
-
-## 🚀 Installation
-
-```bash
-npm create astro@latest product-frontend
-cd product-frontend
-npm install graphql graphql-request react react-dom
-```
-
-(Optional) Install Tailwind:
-
-```bash
-npx astro add tailwind
 ```
 
 ---
@@ -101,7 +131,7 @@ export default function CreateProduct({ onCreated }) {
   };
 
   return (
-    <form onSubmit={submit} className="space-y-3 p-4 border rounded">
+    <form onSubmit={submit} className="space-y-3 p-4 border rounded bg-white shadow">
       <h2 className="text-xl font-bold">Create Product</h2>
 
       <input
@@ -175,7 +205,7 @@ export default function ProductList({ refresh }) {
   };
 
   return (
-    <table className="table-auto w-full mt-6 border">
+    <table className="table-auto w-full mt-6 border bg-white shadow">
       <thead>
         <tr className="bg-gray-100">
           <th className="p-2">Name</th>
@@ -217,7 +247,7 @@ import { useState } from "react";
 ---
 
 <html>
-  <body class="p-8">
+  <body class="p-8 bg-gray-50">
     <h1 class="text-3xl font-bold mb-6">Product Manager</h1>
 
     <CreateProduct client:load onCreated={() => setRefresh(Date.now())} />
@@ -229,11 +259,13 @@ import { useState } from "react";
 
 ---
 
-# 🎨 Optional Tailwind Styles
-
-Add to `src/styles/global.css`:
+# 🎨 Tailwind Utility Classes (`src/styles/global.css`)
 
 ```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .input {
   @apply border p-2 w-full rounded;
 }
@@ -267,7 +299,7 @@ Visit:
 http://localhost:4321
 ```
 
-You should now be able to:
+You can now:
 
 - Create a product  
 - See it appear in the table  
