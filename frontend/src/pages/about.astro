@@ -1,0 +1,32 @@
+---
+import { GraphQLClient } from "graphql-request";
+
+const client = new GraphQLClient("/graphql");
+
+const query = `
+  query {
+    about
+  }
+`;
+
+let aboutText = "";
+
+try {
+  const data = await client.request(query);
+  aboutText = data.about;
+} catch (err) {
+  aboutText = "Error loading about message.";
+}
+---
+
+<html>
+  <body class="p-8 bg-gray-50">
+    <h1 class="text-3xl font-bold mb-4">About</h1>
+
+    <p class="text-lg bg-white p-4 rounded shadow">
+      {aboutText}
+    </p>
+
+    <a href="/" class="text-blue-600 underline mt-4 inline-block">Back to Home</a>
+  </body>
+</html>
