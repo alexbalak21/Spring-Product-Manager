@@ -27,8 +27,8 @@ export default function CreateProduct({ onCreated }) {
   };
 
   return (
-    <form onSubmit={submit} className="space-y-3 p-4 border rounded bg-white shadow">
-      <h2 className="text-xl font-bold">Create Product</h2>
+    <form onSubmit={submit} className="space-y-3 rounded-2xl border border-slate-800 bg-slate-900/80 p-5 shadow-lg shadow-slate-950/40 backdrop-blur">
+      <h2 className="text-xl font-semibold text-slate-50">Create Product</h2>
 
       <input
         className="input"

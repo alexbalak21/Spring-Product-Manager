@@ -6,10 +6,12 @@ export default function App() {
   const [refresh, setRefresh] = useState(Date.now());
 
   return (
-    <div className="p-8 bg-gray-50 min-h-screen">
-      <h1 className="text-3xl font-bold mb-6">Product Manager</h1>
+    <div className="min-h-screen bg-slate-950 px-6 py-8 text-slate-100 sm:px-8 lg:px-10">
+      <h1 className="mb-8 text-3xl font-semibold tracking-tight text-slate-50 sm:text-4xl">
+        Product Manager
+      </h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
         <div className="md:col-span-1">
           <CreateProduct onCreated={() => setRefresh(Date.now())} />
         </div>

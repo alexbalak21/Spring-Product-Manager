@@ -1,1 +1,25 @@
 @import "tailwindcss";
+
+@layer base {
+	body {
+		@apply min-h-screen bg-slate-950 text-slate-100 antialiased;
+	}
+}
+
+@layer components {
+	.input {
+		@apply w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-slate-100 placeholder:text-slate-500 focus:border-cyan-400 focus:outline-none;
+	}
+
+	.btn {
+		@apply inline-flex items-center justify-center rounded-lg bg-cyan-500 px-4 py-2 font-medium text-slate-950 transition hover:bg-cyan-400;
+	}
+
+	.btn-delete {
+		@apply inline-flex items-center justify-center rounded-lg bg-rose-500 px-3 py-1.5 font-medium text-white transition hover:bg-rose-400;
+	}
+
+	.btn-edit {
+		@apply inline-flex items-center justify-center rounded-lg bg-amber-400 px-3 py-1.5 font-medium text-slate-950 transition hover:bg-amber-300;
+	}
+}

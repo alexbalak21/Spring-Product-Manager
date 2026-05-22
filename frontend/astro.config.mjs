@@ -6,12 +6,14 @@ import react from '@astrojs/react';
 export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
-  },
-
-  server: {
-    proxy: {
-      '/graphql': 'http://localhost:8080/graphql'
-    }
+    server: {
+      proxy: {
+        '/graphql': {
+          target: 'http://localhost:8080',
+          changeOrigin: true,
+        },
+      },
+    },
   },
 
   integrations: [react()]
